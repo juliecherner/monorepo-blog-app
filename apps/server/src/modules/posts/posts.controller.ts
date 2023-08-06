@@ -11,8 +11,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
-import { CreatePostDto } from './dto/create-post.dto';
-import { UpdatePostDto } from './dto/update-post.dto';
+import { CreatePostDto } from 'types';
+import { UpdatePostDto } from 'types';
 import { BaseController } from '../base/base.controller';
 import { BaseService } from '../base/base.service';
 import { PostModel } from './post.model';

@@ -26,7 +26,7 @@ export abstract class BaseService<TModel, TCreateDto, TUpdateDto> {
   }
 
   async update(id: string, updateDto: TUpdateDto) {
-    return await this.baseModel.findByIdAndUpdate(id, updateDto, { new: true });
+    return await this.baseModel.findByIdAndUpdate(id, updateDto as any, { new: true });
   }
 
   async remove(id: string) {

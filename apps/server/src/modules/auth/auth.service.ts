@@ -4,8 +4,7 @@ import { JwtService } from '@nestjs/jwt';
 import { UserService } from '../user/user.service';
 import { AuthLoginDto } from './dto/auth-login.dto';
 import { AuthRegisterDto } from './dto/auth-register.dto';
-
-import { JwtPayload } from './jwt-payload.type';
+import { JwtPayload } from 'types';
 
 
 const saltOrRounds = 10;

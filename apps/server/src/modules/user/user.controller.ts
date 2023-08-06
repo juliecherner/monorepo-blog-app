@@ -1,10 +1,8 @@
 import { Body, Param, Controller, Get, Post, Patch } from '@nestjs/common';
-import { UserService } from './user.service';
 import { UserModel } from './user.model';
-import { CreateUserDto } from './dto/create-user.dto';
-import { BaseController } from '../base/base.controller';
+import { CreateUserDto } from 'types';
 import { BaseService } from '../base/base.service';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { UpdateUserDto } from 'types';
 import { ApiTags } from '@nestjs/swagger';
 
 @Controller('users')

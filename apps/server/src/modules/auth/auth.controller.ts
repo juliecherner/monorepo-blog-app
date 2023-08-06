@@ -12,7 +12,7 @@ import { AuthLoginDto } from './dto/auth-login.dto';
 import { AuthRegisterDto } from './dto/auth-register.dto';
 
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
-import { JwtPayload } from './jwt-payload.type';
+import { JwtPayload } from 'types';
 import { Requestor } from './requestor.decorator';
 import { AuthGuard } from './auth.guard';
 
