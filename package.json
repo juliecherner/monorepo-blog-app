@@ -5,14 +5,25 @@
     "start": "turbo run start",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "doppler": "doppler -p app_server -c ${APP_ENV} run -- ",
+    "env:local:up": "APP_ENV=local yarn doppler docker compose up -d",
+    "env:local:down": "APP_ENV=local yarn doppler docker compose down ",
+    "env:test:up": "APP_ENV=test yarn doppler docker compose up -d",
+    "env:test:down": "APP_ENV=test yarn doppler docker compose down"
   },
   "devDependencies": {
     "@turbo/gen": "^1.9.7",
-    "eslint": "^7.32.0",
-    "eslint-config-custom": "*",
+    "@types/node": "18.16.0",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^5.0.0",
     "prettier": "^2.5.1",
-    "turbo": "latest"
+    "source-map-support": "^0.5.21",
+    "turbo": "latest",
+    "typescript": "^4.9.5"
   },
   "name": "my-turborepo",
   "packageManager": "yarn@1.22.19",
