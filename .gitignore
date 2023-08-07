@@ -37,3 +37,6 @@ yarn-error.log*
 
 # mongo container
 .db
+
+# act
+bin
