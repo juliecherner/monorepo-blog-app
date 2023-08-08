@@ -1,4 +1,4 @@
-# Turborepo starter
+# Blogging platform
 
 This project is created with official starter Turborepo:
 ```sh
@@ -12,17 +12,26 @@ This Turborepo includes the following packages/apps:
 
 ### Apps and Packages
 
-- `server`: a Nest.js [Nest.js](https://nestjs.org/) app
-- `web`: a Next.js [Next.js](https://nextjs.org/) app
-- `types`: contains type for `server` application
-- `config`: contains configurations of `eslint`, `jest`, `ts` for `server` and `web` applications
+- server: a [Nest.js](https://nestjs.org/) app
+- web: a [Next.js](https://nextjs.org/) app
+- types: contains type for `server` application
+- config: contains configurations of eslint, jest, ts for server and web applications
 
-
-### Build and run locally
+**Build and run locally**
 
 To develop all apps and packages, run the following command:
+
+Install [Doppler CLI](https://docs.doppler.com/docs/install-cli)
+
+```
+docker login
+or
+
+export DOPPLER_TOKEN=...
+```
 
 ```
 yarn run build
 yarn run dev
 ```
+
