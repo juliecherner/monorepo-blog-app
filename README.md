@@ -21,17 +21,28 @@ This Turborepo includes the following packages/apps:
 
 To develop all apps and packages, run the following command:
 
-Install [Doppler CLI](https://docs.doppler.com/docs/install-cli)
+Install [Doppler CLI](https://docs.doppler.com/docs/install-cli) and login ot provide SSH key
 
 ```
 docker login
 or
-
 export DOPPLER_TOKEN=...
 ```
-
+Run database on local or test environment
+```
+env:local:up
+env:test:up
+```
+Build and run
 ```
 yarn run build
 yarn run dev
 ```
+Stop database on local/test environment
+```
+yarn run env:local:down
+or
+env:test:down
+```
+
 
