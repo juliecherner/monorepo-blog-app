@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "APP_ENV=local yarn doppler next dev -p 3000",
+    "start": "APP_ENV=local yarn doppler next dev -p 3000",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "doppler": "doppler -p app_server -c ${APP_ENV} run -- ",
+    "test": "APP_ENV=local yarn doppler next dev"
   },
   "dependencies": {
     "next": "^13.4.1",
