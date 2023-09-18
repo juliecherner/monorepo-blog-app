@@ -28,13 +28,14 @@ export class AuthService {
   async login({ username, password }: AuthLoginDto) {
     const users = await this.userService.find({ username });
 
-    if (!users) {
+    if (!users.length) {
       throw new UnauthorizedException('Invalid username');
     }
     const user = users[0];
+
     const isPasswordValid = await bcrypt.compare(password, user?.password);
     if (!isPasswordValid) {
-      throw new Error('Invalid password');
+      throw new UnauthorizedException('Invalid password');
     }
     const payload = { _id: user._id, username };
     return {
