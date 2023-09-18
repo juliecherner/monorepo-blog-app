@@ -1,10 +1,10 @@
-"use client";
+import Login from "@/components/login";
+import "./global.css";
 
 export default function Page() {
   return (
     <>
-      <div>hi there</div>
-      <button onClick={() => alert("wooo")}>Julies custom button</button>
+      <Login />
     </>
   );
 }
