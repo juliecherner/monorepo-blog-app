@@ -2,7 +2,9 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { INestApplication } from '@nestjs/common';
+import { INestApplication, Logger } from '@nestjs/common';
+import {corsConfig} from 'cors.config';
+import { envConfig } from './env-config';
 
 const swaggerSetup = (app: INestApplication) => {
   const config = new DocumentBuilder()
@@ -12,10 +14,10 @@ const swaggerSetup = (app: INestApplication) => {
       },
       'default',
     )
-    .setTitle('Super api example')
-    .setDescription('The super API description')
+    .setTitle('Postblog API')
+    .setDescription('The blog API description')
     .setVersion('1.0')
-    // .addTag('super api routes')
+    .addTag('Post api routes')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
@@ -23,8 +25,16 @@ const swaggerSetup = (app: INestApplication) => {
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  const port = envConfig.server.port;
+  const host = envConfig.server.host;
+
   swaggerSetup(app);
-  await app.listen(8000);
+  app.enableCors(corsConfig);
+  
+  await app.listen(port, host, () => {
+    Logger.log(`Server running on http://${host}:${port}`);
+  });
 }
 
 bootstrap();
