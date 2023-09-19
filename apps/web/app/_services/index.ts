@@ -1,14 +1,14 @@
 import { Method, CustomResponse } from "@/types/fetcher";
 
 export const fetcher = async (
-  METHOD: Method,
   url: string,
-  payload?: any
+  payload?: any,
+  METHOD?: Method
 ): Promise<CustomResponse<any>> => {
   const token = extractToken();
-  
+
   const options = {
-    method: METHOD,
+    method: METHOD || "GET",
     ...(payload && { body: JSON.stringify(payload) }),
     headers: {
       accept: "application/json",

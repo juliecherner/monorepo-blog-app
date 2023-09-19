@@ -5,5 +5,6 @@ const serverUri = `http://${process.env.HOST || "localhost"}:${
 export const envConfig = {
   server: {
     loginUrl: serverUri + "/auth/login",
+    postsUrl: serverUri + "/posts"
   },
 };

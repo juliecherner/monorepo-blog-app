@@ -2,17 +2,19 @@
 
 type CustomErrorProps = {
   errorMessage: string;
-  closeErrorMessage: () => void;
+  action: () => void;
+  buttonText: string;
 };
 
 export default function CustomError({
   errorMessage,
-  closeErrorMessage,
+  action,
+  buttonText
 }: CustomErrorProps) {
   return (
     <div>
       <div>{errorMessage}</div>
-      <button onClick={closeErrorMessage}>Close</button>
+      <button onClick={action}>{buttonText}</button>
     </div>
   );
 }

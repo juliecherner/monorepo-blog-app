@@ -1,14 +1,17 @@
 "use client";
 
 import React, { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
 import CustomError from "@/components/customError";
 import { login } from "@/services/login";
+import { createErrorMessageForServer } from "@/services/error";
 import { setToken } from "@/services/index";
 import { CustomResponse, LoginResponse, ServerAppError } from "@/types/fetcher";
 
 export default function Login() {
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const router = useRouter();
 
   const {
     register,
@@ -30,15 +33,13 @@ export default function Login() {
   function handleLoginResponse(response: CustomResponse<LoginResponse>) {
     if (!response.ok) {
       const error = response?.data as ServerAppError;
-      const message = `Error: ${error.error || "Unexpected error"}, ${
-        error.message || "Unexpected"
-      }, code ${error.statusCode}.`;
+      const message = createErrorMessageForServer(error);
 
       setErrorMessage(message);
       return;
     }
 
-    //navigate
+    router.push("/posts");
 
     setToken((response?.data as LoginResponse).access_token);
     if (errorMessage) setErrorMessage("");
@@ -50,7 +51,8 @@ export default function Login() {
       {errorMessage && (
         <CustomError
           errorMessage={errorMessage}
-          closeErrorMessage={() => setErrorMessage("")}
+          buttonText="Close"
+          action={() => setErrorMessage("")}
         />
       )}
       <form
@@ -58,40 +60,38 @@ export default function Login() {
         onSubmit={handleSubmit(formSubmit)}
       >
         <div className="font-bold text-center text-lg">Please, login</div>
-   
-          <div className="h-28 w-96 flex flex-col gap-2">
-          
-            <label htmlFor="login">Login</label>
 
-            <input
-              id="login"
-              type="text"
-              {...register("login", { required: true })}
-              placeholder="Enter login"
-              className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500"
+        <div className="h-28 w-96 flex flex-col gap-2">
+          <label htmlFor="login">Login</label>
 
-            />
-            {errors.login && (
-              <p className="text-red-600 font-bold">Valid email is required.</p>
-            )}
-          </div>
+          <input
+            id="login"
+            type="text"
+            {...register("login", { required: true })}
+            placeholder="Enter login"
+            className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500"
+          />
+          {errors.login && (
+            <p className="text-red-600 font-bold">Valid email is required.</p>
+          )}
+        </div>
 
-          <div className="h-28 w-96 flex flex-col gap-2">
-            <label htmlFor="password">Password</label>
-            <input
-              id="password"
-              type="password"
-              {...register("password", { required: true, minLength: 8 })}
-              placeholder="Enter password"
-              className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500"
-            />
-            {errors.password && (
-              <p className="text-red-600 font-bold">
-                Password of minimum 8 symbols is required.
-              </p>
-            )}
-          </div>
-    
+        <div className="h-28 w-96 flex flex-col gap-2">
+          <label htmlFor="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            {...register("password", { required: true, minLength: 8 })}
+            placeholder="Enter password"
+            className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500"
+          />
+          {errors.password && (
+            <p className="text-red-600 font-bold">
+              Password of minimum 8 symbols is required.
+            </p>
+          )}
+        </div>
+
         <input
           className="w-96 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
           type="submit"
