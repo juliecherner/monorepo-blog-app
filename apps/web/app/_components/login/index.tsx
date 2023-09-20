@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import CustomError from "@/components/customError";
 import { login } from "@/services/login";
 import { createErrorMessageForServer } from "@/services/error";
-import { setToken } from "@/services/index";
+import { setToken } from "@/services/token";
 import { CustomResponse, LoginResponse, ServerAppError } from "@/types/fetcher";
 
 export default function Login() {

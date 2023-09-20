@@ -1,5 +1,5 @@
 import { Method, CustomResponse } from "@/types/fetcher";
-
+import {extractToken} from "@/services/token"
 export const fetcher = async (
   url: string,
   payload?: any,
@@ -25,10 +25,3 @@ export const fetcher = async (
   });
 };
 
-function extractToken(): string {
-  return localStorage.getItem("token") || "";
-}
-
-export function setToken(token: string): void {
-  localStorage.setItem("token", token);
-}

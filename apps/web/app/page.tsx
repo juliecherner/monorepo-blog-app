@@ -1,5 +1,5 @@
 import Login from "@/components/login";
-import "./global.css";
+import "./globals.css";
 
 export default function Page() {
   return (

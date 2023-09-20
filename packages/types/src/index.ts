@@ -1,3 +1,4 @@
+export * from './posts/base-post.dto';
 export * from './posts/create-post.dto';
 export * from './posts/update-post.dto';
 export * from './users/create-user.dto';
