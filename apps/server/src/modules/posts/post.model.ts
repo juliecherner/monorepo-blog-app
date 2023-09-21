@@ -15,7 +15,7 @@ export class PostModel extends BaseModel {
   description: string;
 
   @Prop()
-  author: string;
+  authorId: string;
 
   _id: Types.ObjectId
 }
