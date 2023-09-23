@@ -3,3 +3,9 @@ export type Post = {
   title: string;
   text: string;
 };
+
+export enum PostAction {
+  CREATE = "CREATE",
+  EDIT = "EDIT",
+  DELETE = "DELETE",
+}

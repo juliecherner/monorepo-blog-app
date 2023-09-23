@@ -1,5 +1,6 @@
 import { Method, CustomResponse } from "@/types/fetcher";
-import {extractToken} from "@/services/token"
+import { extractToken } from "@/services/token";
+
 export const fetcher = async (
   url: string,
   payload?: any,
@@ -13,15 +14,25 @@ export const fetcher = async (
     headers: {
       accept: "application/json",
       "Content-Type": "application/json",
-      Authentication: `Bearer ${token}`,
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Credentials": true,
+      Authorization: `Bearer ${token}`,
     },
   };
 
   return fetch(url, options).then(async (res) => {
+    let data = await handleResponse(res.json());
     return {
       ok: res.ok,
-      data: await res.json(),
+      data,
     };
   });
 };
 
+async function handleResponse(promise: Promise<any>) {
+  try {
+    return await promise;
+  } catch {
+    return {};
+  }
+}
