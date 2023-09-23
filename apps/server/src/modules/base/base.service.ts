@@ -30,6 +30,6 @@ export abstract class BaseService<TModel, TCreateDto, TUpdateDto> {
   }
 
   async remove(id: string) {
-    await this.baseModel.findByIdAndRemove(id);
+    return await this.baseModel.findByIdAndRemove(id);
   }
 }
