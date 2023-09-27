@@ -29,7 +29,6 @@ export class PostEditGuard implements CanActivate {
 
     if (user.role === 'admin') return true;
 
-    console.log("user from post guard", user);
     return true;
   }
 }
