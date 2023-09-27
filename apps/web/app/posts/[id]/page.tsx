@@ -31,7 +31,7 @@ export default function PostPage({
   const isUserPost = () => {
     const currentUserId = extractUserId();
 
-    return data?.data?.authorId === currentUserId;
+    return data?.data?.authorId?._id === currentUserId;
   };
 
   const remove = async () => {
@@ -81,11 +81,8 @@ export default function PostPage({
       )}
 
       <div>
-        {isUserPost() ? (
-          <p>Your post | {data?.data?.authorId}</p>
-        ) : (
-          <p>Author id: {data?.data?.authorId}</p>
-        )}
+        {isUserPost() ? <p>Your post</p> : <p>Author</p>}
+        <p>{postService.getNameFromEmail(data?.data?.authorId?.username)}</p>
       </div>
     </div>
   );

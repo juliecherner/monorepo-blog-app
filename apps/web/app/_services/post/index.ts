@@ -28,3 +28,8 @@ export async function editPost(id: string, postBody: Omit<Post, "_id">) {
 
   return await fetcher(`${envConfig.server.postsUrl}/${id}`, payload, "PATCH");
 }
+
+export function getNameFromEmail(email: string | undefined) {
+  if (!email) return "Unknown user"
+  return email.replace(/@.*$/, "");
+}
