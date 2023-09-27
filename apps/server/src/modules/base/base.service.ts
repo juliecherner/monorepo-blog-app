@@ -6,7 +6,7 @@ import { BaseModel } from './base.model';
 export abstract class BaseService<TModel, TCreateDto, TUpdateDto> {
   constructor(
     @InjectModel(BaseModel.name) private readonly baseModel: Model<TModel>,
-  ) {}
+  ) { }
 
   async create(createDto: TCreateDto) {
     const createdModel = new this.baseModel(createDto);
@@ -25,8 +25,17 @@ export abstract class BaseService<TModel, TCreateDto, TUpdateDto> {
     return await this.baseModel.findById(id);
   }
 
+  async findOneAndPopulate(id: string, fieldName: string, chosenFields: Record<string, number>) {
+    return await this.baseModel
+      .findById(id)
+      .populate({ path: fieldName, select: chosenFields })
+      .exec();
+  }
+
   async update(id: string, updateDto: TUpdateDto) {
-    return await this.baseModel.findByIdAndUpdate(id, updateDto as any, { new: true });
+    return await this.baseModel.findByIdAndUpdate(id, updateDto as any, {
+      new: true,
+    });
   }
 
   async remove(id: string) {

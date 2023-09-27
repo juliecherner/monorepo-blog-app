@@ -3,7 +3,6 @@ import { HydratedDocument } from 'mongoose';
 import { BaseModel } from '../base/base.model';
 import { Types } from 'mongoose';
 
-
 export type PostDocument = HydratedDocument<PostModel>;
 
 @Schema()
@@ -14,10 +13,10 @@ export class PostModel extends BaseModel {
   @Prop()
   description: string;
 
-  @Prop()
-  authorId: string;
+  @Prop({ type: Types.ObjectId, ref: 'UserModel' })
+  authorId: { type: Types.ObjectId; ref: 'UserModel' };
 
-  _id: Types.ObjectId
+  _id: Types.ObjectId;
 }
 
 export const PostSchema = SchemaFactory.createForClass(PostModel);

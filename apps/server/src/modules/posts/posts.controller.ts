@@ -50,7 +50,9 @@ export class PostsController extends BaseController<
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.postService.findOne(id);
+    return this.postService.findOneAndPopulate(id, 'authorId', {
+      username: 1,
+    });
   }
 
   @Patch(':id')
