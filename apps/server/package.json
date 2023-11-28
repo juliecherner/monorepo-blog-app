@@ -13,12 +13,13 @@
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "APP_ENV=test yarn doppler jest -c jest.config.ts",
+    "test": "APP_ENV=test yarn doppler jest --config ./test/jest-e2e.json",
+    "test:chunk:1": "APP_ENV=test yarn doppler jest -c jest.config.ts test/app.e2e.spec.ts",
+    "test:chunk:2": "APP_ENV=test yarn doppler jest -c jest.config.ts test/app2.e2e.spec.ts",
     "doppler": "doppler -p app_server -c ${APP_ENV} run -- ",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",

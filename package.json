@@ -10,7 +10,10 @@
     "env:local:up": "APP_ENV=local yarn doppler docker compose up -d",
     "env:local:down": "APP_ENV=local yarn doppler docker compose down ",
     "env:test:up": "APP_ENV=test yarn doppler docker compose up -d",
-    "env:test:down": "APP_ENV=test yarn doppler docker compose down"
+    "env:test:down": "APP_ENV=test yarn doppler docker compose down",
+    "test": "turbo run test --parallel",
+    "test:chunk:1": "yarn workspace server test:chunk:1",
+    "test:chunk:2": "yarn workspace server test:chunk:2"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",
