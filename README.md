@@ -21,23 +21,41 @@ This Turborepo includes the following packages/apps:
 
 To develop all apps and packages, run the following command:
 
-Install [Doppler CLI](https://docs.doppler.com/docs/install-cli) and login ot provide SSH key
+Have Docker and Docker compose installed.
 
+Pre-installation of CLI (Turbo, Next, Nest, Doppler):
+
+```
+npm install turbo -g
+npm install -g @nestjs/cli
+npx next -h
+(curl -Ls --tlsv1.2 --proto "=https" --retry 3 https://cli.doppler.com/install.sh || wget -t 3 -qO- https://cli.doppler.com/install.sh) | sudo sh
+```
+
+Install packages:
+```
+yarn install
+```
+
+Get Doppler secrets:
 ```
 docker login
 or
 export DOPPLER_TOKEN=...
 ```
+
 Run database on local or test environment
 ```
 env:local:up
 env:test:up
 ```
+
 Build and run
 ```
 yarn run build
 yarn run dev
 ```
+
 Stop database on local/test environment
 ```
 yarn run env:local:down
