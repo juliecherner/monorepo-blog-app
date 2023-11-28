@@ -1,9 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
-import * as request from 'supertest';
+import request from 'supertest';
 import { faker } from '@faker-js/faker';
 import { AppModule } from './../src/app.module';
-
+import {BasePostDto} from "types";
+ 
 describe('AppController (e2e/api-tests)', () => {
   let app: INestApplication;
 
@@ -26,7 +27,7 @@ describe('AppController (e2e/api-tests)', () => {
   });
 
   describe('Posts routes', () => {
-    let postIds = [];
+    let postIds: BasePostDto[] = [];
 
     it('/ (GET)/POSTS', async () => {
       return request(app.getHttpServer())
@@ -34,7 +35,7 @@ describe('AppController (e2e/api-tests)', () => {
         .expect(200)
         .then((response) => {
           expect(response?.body).toBeTruthy();
-          postIds = response?.body?.posts.map((post) => post._id);
+          postIds = response?.body?.posts.map((post: BasePostDto) => post._id);
         });
     });
 
@@ -53,7 +54,7 @@ describe('AppController (e2e/api-tests)', () => {
       //automation!
       const realIds = [
         postIds[0],
-        postIds[(Math.floor(idsLength / 2), postIds[idsLength - 1])],
+        postIds[(Math.floor(idsLength / 2), postIds[idsLength - 1]) as unknown as number],
       ];
       for (const id of realIds) {
         return request(app.getHttpServer())
