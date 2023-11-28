@@ -28,12 +28,13 @@
     "@nestjs/mongoose": "^9.2.2",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/swagger": "^6.3.0",
+    "@types/supertest": "^2.0.16",
     "bcrypt": "^5.1.0",
+    "config": "*",
     "mongoose": "^7.2.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",
-    "types": "*",
-    "config": "*"
+    "types": "*"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.0.2"
