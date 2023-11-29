@@ -46,48 +46,47 @@ jobs:
         chunk: [1, 2]
     env:
       DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
-      
-  steps:
-    - name: Checkout
-      uses: actions/checkout@v3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-    - name: Node setup
-      uses: actions/setup-node@v3
-      with:
-        node-version-file: '.nvmrc'
+      - name: Node setup
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
 
-    - name: Install global deps
-      run: npm i -g yarn  typescript@4.9.5 @nestjs/cli@9.4.0
+      - name: Install global deps
+        run: npm i -g yarn  typescript@4.9.5 @nestjs/cli@9.4.0
 
-    - name: Cache
-      id: cache-dependencies
-      uses: actions/cache@v3
-      with:
-        path: '**/node_modules'
-        key:  node_modules-${{ github.ref_name }}-${{ hashFiles('./yarn.lock') }}
-        restore-keys: |
-          node_modules-${{ github.ref_name  }}-
-          node_modules-master-
-          node_modules-main
-          node_modules-
+      - name: Cache
+        id: cache-dependencies
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key:  node_modules-${{ github.ref_name }}-${{ hashFiles('./yarn.lock') }}
+          restore-keys: |
+            node_modules-${{ github.ref_name  }}-
+            node_modules-master-
+            node_modules-main
+            node_modules-
 
-    - name: Install dependencies
-      if: ${{ steps.cache-dependencies.outputs.cache-hit != 'true'  }}
-      run: yarn
+      - name: Install dependencies
+        if: ${{ steps.cache-dependencies.outputs.cache-hit != 'true'  }}
+        run: yarn
 
-    - name: Install Doppler CLI
-      uses: dopplerhq/cli-action@v2
-      
-    - name: Build
-      run: yarn build
+      - name: Install Doppler CLI
+        uses: dopplerhq/cli-action@v2
+        
+      - name: Build
+        run: yarn build
 
-    - name: Set test env and db
-      run: yarn env:test:up
-      
-    - name: Run test
-      run: yarn test:chunk:${{ matrix.chunk }}
-      
-    - name: Down test env and db
-      run: yarn env:test:down
+      - name: Set test env and db
+        run: yarn env:test:up
+        
+      - name: Run test
+        run: yarn test:chunk:${{ matrix.chunk }}
+        
+      - name: Down test env and db
+        run: yarn env:test:down
 
 
